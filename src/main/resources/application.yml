@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:8000/eplscheduler2021-22
+    username: jimin
+    password: simon1126
+  thymeleaf:
+    prefix: classpath:/templates/
+    cache: false
+    suffix: .html
+    check-template-location: true
+  devtools:
+    livereload:
+      enabled: true
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        ddl-auto: update
+        show-sql: true
