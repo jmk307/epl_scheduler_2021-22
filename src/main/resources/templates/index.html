@@ -9,7 +9,7 @@
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
 
 	</head>
 	<body>
@@ -17,7 +17,9 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Table #02</h2>
+					<h2 class="heading-section" id="start"></h2>
+					<input class="datepicker" id="dp">
+					<button onclick="getajax()">보기</button>
 				</div>
 			</div>
 			<div class="row">
@@ -26,69 +28,25 @@
 						<table class="table">
 						  <thead class="thead-dark">
 						    <tr>
-						      <th>ID no.</th>
-						      <th>First Name</th>
-						      <th>Last Name</th>
-						      <th>Email</th>
+						      <th>시작 시간</th>
+						      <th>홈</th>
+						      <th>어웨이</th>
+						      <th>결과</th>
 						      <th>&nbsp;</th>
 						    </tr>
 						  </thead>
 						  <tbody>
-						    <tr class="alert" role="alert">
-						      <th scope="row">001</th>
-						      <td>Mark</td>
-						      <td>Otto</td>
-						      <td>markotto@email.com</td>
-						      <td>
-						      	<a href="#" class="close" data-dismiss="alert" aria-label="Close">
-				            	<span aria-hidden="true"><i class="fa fa-close"></i></span>
-				          	</a>
-				        	</td>
-						    </tr>
-						    <tr class="alert" role="alert">
-						      <th scope="row">002</th>
-						      <td>Jacob</td>
-						      <td>Thornton</td>
-						      <td>jacobthornton@email.com</td>
-						      <td>
-						      	<a href="#" class="close" data-dismiss="alert" aria-label="Close">
-				            	<span aria-hidden="true"><i class="fa fa-close"></i></span>
-				          	</a>
-				        	</td>
-						    </tr>
-						    <tr class="alert" role="alert">
-						      <th scope="row">003</th>
-						      <td>Larry</td>
-						      <td>the Bird</td>
-						      <td>larrybird@email.com</td>
-						      <td>
-						      	<a href="#" class="close" data-dismiss="alert" aria-label="Close">
-				            	<span aria-hidden="true"><i class="fa fa-close"></i></span>
-				          	</a>
-				        	</td>
-						    </tr>
-						    <tr class="alert" role="alert">
-						      <th scope="row">004</th>
-						      <td>John</td>
-						      <td>Doe</td>
-						      <td>johndoe@email.com</td>
-						      <td>
-						      	<a href="#" class="close" data-dismiss="alert" aria-label="Close">
-				            	<span aria-hidden="true"><i class="fa fa-close"></i></span>
-				          	</a>
-				        	</td>
-						    </tr>
-						    <tr class="alert" role="alert">
-						      <th scope="row">005</th>
-						      <td>Gary</td>
-						      <td>Bird</td>
-						      <td>garybird@email.com</td>
-						      <td>
-						      	<a href="#" class="close" data-dismiss="alert" aria-label="Close">
-				            	<span aria-hidden="true"><i class="fa fa-close"></i></span>
-				          	</a>
-				        	</td>
-						    </tr>
+						  	<tr class="alert" role="alert"  th:each= "get : ${list}">
+								<th scope="row" th:text="${get.startTime}"></th>
+								<td th:text="${get.home}"></td>
+								<td th:text="${get.away}"></td>
+								<td th:text="${get.result}">/td>
+								<td>
+									<a href="#" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true"><i class="fa fa-close"></i></span>
+									</a>
+								</td>
+							</tr>
 						  </tbody>
 						</table>
 					</div>
@@ -97,11 +55,44 @@
 		</div>
 	</section>
 
-	<script src="js/jquery.min.js"></script>
-  <script src="js/popper.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/main.js"></script>
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/popper.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script>
+		$('.datepicker').datepicker({
+			dateFormat: 'yy-mm-dd',	//날짜 포맷이다. 보통 yy-mm-dd 를 많이 사용하는것 같다.
+			prevText: '이전 달',	// 마우스 오버시 이전달 텍스트
+			nextText: '다음 달',	// 마우스 오버시 다음달 텍스트
+			closeText: '닫기', // 닫기 버튼 텍스트 변경
+			currentText: '오늘', // 오늘 텍스트 변경
+			monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],	//한글 캘린더중 월 표시를 위한 부분
+			monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],	//한글 캘린더 중 월 표시를 위한 부분
+			dayNames: ['일', '월', '화', '수', '목', '금', '토'],	//한글 캘린더 요일 표시 부분
+			dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],	//한글 요일 표시 부분
+			dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],	// 한글 요일 표시 부분
+			showMonthAfterYear: true,	// true : 년 월  false : 월 년 순으로 보여줌
+			yearSuffix: '년',	//
+			defaultDate:'2021-08-14'
+		});
 
+		function getajax() {
+			let startDate = $("#dp").val()
+			$.ajax({
+				type: "get",
+				url: "http://localhost:8080/boards/list/" + startDate,
+				dataType: "text",
+				success: function (res) {
+					console.log(startDate);
+					console.log("성공");
+					location.replace(this.url)
+				}
+			})
+		}
+	</script>
 	</body>
 </html>
 
