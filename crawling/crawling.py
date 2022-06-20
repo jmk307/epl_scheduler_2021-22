@@ -18,15 +18,20 @@ driver.get(url)
 startTime = driver.find_elements_by_xpath(
     '//*[@id="_monthlyScheduleList"]/tr/td[1]/div/span[1]')
 
-startDate = driver.find_elements_by_xpath('//*[@id="_monthlyScheduleList"]/tr/th/div/em')
+startDate = driver.find_elements_by_xpath(
+    '//*[@id="_monthlyScheduleList"]/tr/th/div/em')
 
-home = driver.find_elements_by_xpath('//*[@id="_monthlyScheduleList"]/tr/td[2]/div/span[1]/span[2]')
+home = driver.find_elements_by_xpath(
+    '//*[@id="_monthlyScheduleList"]/tr/td[2]/div/span[1]/span[2]')
 
-away = driver.find_elements_by_xpath('//*[@id="_monthlyScheduleList"]/tr/td[2]/div/span[2]/span[2]')
+away = driver.find_elements_by_xpath(
+    '//*[@id="_monthlyScheduleList"]/tr/td[2]/div/span[2]/span[2]')
 
-homeScore = driver.find_elements_by_xpath('//*[@id="_monthlyScheduleList"]/tr/td[2]/div/span[1]/span[3]')
+homeScore = driver.find_elements_by_xpath(
+    '//*[@id="_monthlyScheduleList"]/tr/td[2]/div/span[1]/span[3]')
 
-awayScore = driver.find_elements_by_xpath('//*[@id="_monthlyScheduleList"]/tr/td[2]/div/span[2]/span[3]')
+awayScore = driver.find_elements_by_xpath(
+    '//*[@id="_monthlyScheduleList"]/tr/td[2]/div/span[2]/span[3]')
 
 for i in startDate:
     print(i.text)
@@ -44,16 +49,15 @@ for i in awayScore:
     AwayScore.append(i.text)
 
 for i in range(len(HomeScore)):
-    result.append(HomeScore[i] + ' : ' + AwayScore[i])
+    result.append(HomeScore[i] + ' - ' + AwayScore[i])
 
 for i in startTime:
     if i.text == '경기가 없습니다.':
         continue
     StartTime.append(i.text)
 
-f = open('epl.csv', 'w', newline='')
+f = open('epl.csv', 'w', newline='', encoding='utf-8')
 wr = csv.writer(f)
 for i in range(len(home)):
     wr.writerow([Home[i], Away[i], '0', StartTime[i], result[i]])
 f.close()
-
