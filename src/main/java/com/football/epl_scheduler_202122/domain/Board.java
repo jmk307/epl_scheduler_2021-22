@@ -22,8 +22,7 @@ public class Board {
 
     private String away;
 
-    @Temporal(TemporalType.DATE)
-    private Date startDate;
+    private String startDate;
 
     @Temporal(TemporalType.TIME)
     private Date startTime;
