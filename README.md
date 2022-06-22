@@ -37,3 +37,15 @@
 ### Trouble Shooting
 1. @GetMapping "list/{startDate}"으로 설정하였는데, 화면이 startDate로 전환되지 않음. 백엔드가 문제가 아닌 ajax 문제일 것으로 예상됨.
    + 해결: 프론트 ajax 코드에 location.replace(url) 추가. -> Success: console.log(res)를 통해 화면이 바뀌진 않지만 응답으로선 결과가 잘 출력되는 것을 알 수 있었음. 응답은 잘 되지만 url이 바뀌지 않는 모습에 그것을 해결하는 코드인 location.replace(url)을 구글링을 통해 발견.(해결시간 약 5시간)
+
+2022/06/22
+-------------
+### 한 것
+1. 스프링부트 jpa 페이징 코드 추가
+
+### Trouble Shooting
+1. jpa 쿼리문에서 limit이 뜬 게 보이는데 프론트에는 전혀 되지 않은 모습을 보임.
+   + 해결: Page<> 안에 지네릭을 Entity에서 DTO로 바꾸었다. 기존 코드에선 return값이 return new PageImpl<>(List<BoardResponseDTO>, pageable, pageBoards.getTotalElements())여서 첫번째 파라미터와 세번째 파라미터의 타입이 달랐었다. 혹시 이 부분이 문제인건가 싶어서 첫 번째 파라미터를 Page<BoardResponseDTO>.getContent()로 바꾸었더니 해결. 사실 처음부터 Page<> 타입을 써도 됬지만 기존에 있던 코드들을 변형하고 싶었다.. ㅠㅠ 앞으로 고집 부리지 말고 안되면 여러 방면으로 해결해보자!
+
+### 다음 할 것
+1. 백엔드 페이징 api를 이용하여 프론트 ui 코드 및 ajax 코드 추가(생각보다 머리써야 할 것 같아서 다음으로 기약.)
