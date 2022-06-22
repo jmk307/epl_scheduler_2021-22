@@ -36,7 +36,7 @@
 						    </tr>
 						  </thead>
 						  <tbody>
-						  	<tr class="alert" role="alert"  th:each= "get : ${list}">
+						  	<tr class="alert" role="alert"  th:each= "get : ${boards}">
 								<th scope="row" th:text="${get.startTime}"></th>
 								<td th:text="${get.home}"></td>
 								<td th:text="${get.away}"></td>
@@ -52,6 +52,7 @@
 					</div>
 				</div>
 			</div>
+
 		</div>
 	</section>
 
