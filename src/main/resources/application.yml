@@ -14,6 +14,7 @@ spring:
       enabled: true
   jpa:
     hibernate:
+      database-platform: org.hibernate.dialect.MariaDB103Dialect
       ddl-auto: update
       show-sql: 'true'
     properties:
@@ -22,3 +23,11 @@ spring:
         ddl-auto: update
         show-sql: true
     show-sql: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
