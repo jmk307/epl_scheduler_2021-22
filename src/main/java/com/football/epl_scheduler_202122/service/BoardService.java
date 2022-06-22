@@ -5,6 +5,7 @@ import com.football.epl_scheduler_202122.dto.Board.BoardRequestDTO;
 import com.football.epl_scheduler_202122.dto.Board.BoardResponseDTO;
 import com.football.epl_scheduler_202122.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,12 +24,18 @@ public class BoardService {
 
     public List<BoardResponseDTO> findBoards(String startDate) {
         List<Board> boards = boardRepository.findAll(startDate);
-        return boards.stream().map(BoardResponseDTO::new).collect(Collectors.toList());
+        return boards.stream()
+                .map(BoardResponseDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    public Page<BoardResponseDTO> findPageBoards(String startDate, Pageable pageable) {
+        Page<BoardResponseDTO> pageBoards = boardRepository.findByStartDate(startDate, pageable);
+        return new PageImpl<>(pageBoards.getContent(), pageable, pageBoards.getTotalElements());
     }
 
     public BoardResponseDTO findBoard(Long id) {
         Board board = boardRepository.findById(id).orElse(null);
-
         return new BoardResponseDTO(board);
     }
 
