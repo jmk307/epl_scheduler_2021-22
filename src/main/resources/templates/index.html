@@ -40,7 +40,8 @@
 								<th scope="row" th:text="${get.startTime}"></th>
 								<td th:text="${get.home}"></td>
 								<td th:text="${get.away}"></td>
-								<td th:text="${get.result}">/td>
+								<td th:text="${get.result}"></td>
+<!--								<td th:text="${(boards.number / 10) * 10 + 1}"></td>-->
 								<td>
 									<a href="#" class="close" data-dismiss="alert" aria-label="Close">
 										<span aria-hidden="true"><i class="fa fa-close"></i></span>
@@ -49,6 +50,40 @@
 							</tr>
 						  </tbody>
 						</table>
+						<nav style="text-align: center;">
+							<ul class="pagination"
+								th:with="start=${(boards.number / 10) * 10 + 1},
+								 last=(${start + 9 < boards.totalPages ? start + 9 : boards.totalPages})">
+
+								<li>
+									<a th:href="@{/boards/list/2021-08-14(page=1)}" aria-label="First">
+										<span aria-hidden="true">First</span>
+									</a>
+								</li>
+
+								<li th:class="${boards.first} ? 'disabled'">
+									<a th:href="${boards.first} ? '#' :@{/boards/list/2021-08-14(page=${boards.number})}" aria-label="Previous">
+										<span aria-hidden="true">&lt;</span>
+									</a>
+								</li>
+
+								<li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == boards.number + 1} ? 'active'">
+									<a th:text="${page}" th:href="@{/boards/list/2021-08-14(page=${page})}"></a>
+								</li>
+
+								<li th:class="${boards.last} ? 'disabled'">
+									<a th:href="${boards.last} ? '#' : @{/boards/list/2021-08-14(page=${boards.number + 2})}" aria-label="Next">
+										<span aria-hidden="true">&gt;</span>
+									</a>
+								</li>
+
+								<li>
+									<a th:href="@{/boards/list/2021-08-14(page=${boards.totalPages})}" aria-label="Last">
+										<span aria-hidden="true">Last</span>
+									</a>
+								</li>
+							</ul>
+						</nav>
 					</div>
 				</div>
 			</div>
