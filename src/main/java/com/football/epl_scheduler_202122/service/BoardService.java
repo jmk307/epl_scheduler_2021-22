@@ -30,6 +30,7 @@ public class BoardService {
     }
 
     public Page<BoardResponseDTO> findPageBoards(String startDate, Pageable pageable) {
+        pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber()-1, pageable.getPageSize());
         Page<BoardResponseDTO> pageBoards = boardRepository.findByStartDate(startDate, pageable);
         return new PageImpl<>(pageBoards.getContent(), pageable, pageBoards.getTotalElements());
     }
