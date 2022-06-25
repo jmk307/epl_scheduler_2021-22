@@ -56,8 +56,20 @@
 1. 타임리프 페이징 코드 추가
 
 ### Trouble Shooting
-1. 구글링한 페이징 코드가 계속 500에러가 떴다. -> th:with="start=${T(Math).floor(boards.number / 10) * 10 + 1},
-   last=(${start + 9 < boards.totalPages ? start + 9 : boards.totalPages} 이 코드 중 버림 함수 Math.floor이 타임리프 문법상 에러가 떴다. 그닥 페이지가 많지 않아서 없애버림.
+1. 구글링한 페이징 코드가 계속 500에러가 떴다.
+   + 해결: th:with="start=${T(Math).floor(boards.number / 10) * 10 + 1},
+      last=(${start + 9 < boards.totalPages ? start + 9 : boards.totalPages} 이 코드 중 버림 함수 Math.floor이 타임리프 문법상 에러가 떴다. 그닥 페이지가 많지 않아서 없애버림.
 
 ### 다음 할 것
 1. 날짜별로 페이징 되는 코드 만들기. 잘 떠오르지가 않는데 일단은 2021-08-14일만 페이징 구현을 했다.
+
+2022/06/25
+-------------
+### 한 것
+1. 타임리프 페이징 날짜별로 구현하기
+
+### Trouble Shooting
+1. 날짜별 파라미터를 어떻게 끌고 올지 고민했다.
+   + 해결: model.addattribute 값을 끌고 올라했지만 그렇게하면 리스트 값대로 페이징이 5줄이나 출력이 되었다. 리스트 중 하나만 출력할 수 있는 타임리프 문법을 폭풍 구글링한 결과 th:object를 발견하였고 이를 통해 파싱하여 해결할 수 었다.
+
+
