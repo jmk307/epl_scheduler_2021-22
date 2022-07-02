@@ -1,10 +1,7 @@
 package com.football.epl_scheduler_202122.dto.Board;
 
 import com.football.epl_scheduler_202122.domain.Board;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Date;
 
