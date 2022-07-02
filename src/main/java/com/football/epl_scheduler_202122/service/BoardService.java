@@ -9,7 +9,6 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,17 +21,9 @@ public class BoardService {
         return board.getId();
     }
 
-    public List<BoardResponseDTO> findBoards(String startDate) {
-        List<Board> boards = boardRepository.findAll(startDate);
-        return boards.stream()
-                .map(BoardResponseDTO::new)
-                .collect(Collectors.toList());
-    }
-
-    public Page<BoardResponseDTO> findPageBoards(String startDate, Pageable pageable) {
-        pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber()-1, pageable.getPageSize());
-        Page<BoardResponseDTO> pageBoards = boardRepository.findByStartDate(startDate, pageable);
-        return new PageImpl<>(pageBoards.getContent(), pageable, pageBoards.getTotalElements());
+    // 목록
+    public List<BoardResponseDTO> findBoards(String startDate, int page, Pageable pageable, String keyword) {
+        return boardRepository.findAllByStartDateAndHomeContaining(startDate, keyword, PageRequest.of(page, 3));
     }
 
     public BoardResponseDTO findBoard(Long id) {
