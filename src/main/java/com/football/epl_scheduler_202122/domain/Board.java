@@ -28,4 +28,12 @@ public class Board {
     private Date startTime;
 
     private String result;
+
+    public void update(String home, String away, String startDate, Date startTime, String result) {
+        this.home = home;
+        this.away = away;
+        this.startDate = startDate;
+        this.startTime = startTime;
+        this.result = result;
+    }
 }

@@ -11,8 +11,6 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class BoardRequestDTO {
-    private Long id;
-
     private String home;
 
     private String away;
@@ -25,7 +23,6 @@ public class BoardRequestDTO {
 
     public Board toEntity() {
         return Board.builder()
-                .id(id)
                 .home(home)
                 .away(away)
                 .startDate(startDate)
