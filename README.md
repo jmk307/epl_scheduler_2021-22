@@ -97,3 +97,18 @@
 
 ### 다음 할 것
 1. 검색 기능을 @RequestParam에서 @ModelAttribute로 바꿔보기
+
+2022/07/13
+-------------
+### 한 것
+1. jwt를 이용한 회원가입, 로그인 구현
+2. Swagger 추가
+
+### Trouble Shooting
+1. 딱히 해결하는 데 오랜 걸린 것은 없지만, 회원가입 과정이 굉장히 복잡하다. 기능은 구현했지만 security 과정 중 filter, interceptor, jwt 설정 등 상세한 공부가 필요한 듯 하다.
+
+### 다음 할 것
+1. 왜 세션기반이 아닌 jwt 토큰을 사용하는가?에 대해서 공부해보기
+2. security의 인증과 인가 그리고 복잡한 과정을 상세히 공부해야 됨. 코드만 보기 이해하기엔 너무 방대한 세계이다.
+3. 공격자가 Token을 탈취했을 때, 사용자의 정보가 다 털리므로 jwt에 대한 access token, refresh token 기능 구현
+4. 검색 기능을 @RequestParam에서 @ModelAttribute로 바꿔보기(아마 동아리 수업 시간이 끝나야 해결될 듯 하다.)
