@@ -2,6 +2,7 @@ package com.football.epl_scheduler_202122.controller.api;
 
 import com.football.epl_scheduler_202122.domain.RefreshToken;
 import com.football.epl_scheduler_202122.dto.Member.LoginDto;
+import com.football.epl_scheduler_202122.dto.Member.RefreshTokenRequestDto;
 import com.football.epl_scheduler_202122.dto.Member.TokenDto;
 import com.football.epl_scheduler_202122.jwt.JwtFilter;
 import com.football.epl_scheduler_202122.jwt.TokenProvider;
@@ -56,7 +57,7 @@ public class AuthApiController {
     }
 
     @PostMapping("/accessToken")
-    public TokenDto reissueAccessToken(@RequestParam String token) {
-        return memberService.reissueAccessToken(token);
+    public ResponseEntity<TokenDto> reissueAccessToken(@RequestBody RefreshTokenRequestDto refreshTokenRequestDto) {
+        return ResponseEntity.ok(memberService.reissueAccessToken(refreshTokenRequestDto));
     }
 }

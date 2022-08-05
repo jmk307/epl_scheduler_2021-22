@@ -4,6 +4,7 @@ import com.football.epl_scheduler_202122.domain.Authority;
 import com.football.epl_scheduler_202122.domain.Member;
 import com.football.epl_scheduler_202122.domain.RefreshToken;
 import com.football.epl_scheduler_202122.dto.Member.MemberDto;
+import com.football.epl_scheduler_202122.dto.Member.RefreshTokenRequestDto;
 import com.football.epl_scheduler_202122.dto.Member.TokenDto;
 import com.football.epl_scheduler_202122.exception.DuplicateMemberException;
 import com.football.epl_scheduler_202122.jwt.TokenProvider;
@@ -48,8 +49,8 @@ public class MemberService {
     }
 
     @Transactional
-    public TokenDto reissueAccessToken(String token) {
-        String resolveToken = resolveToken(token);
+    public TokenDto reissueAccessToken(RefreshTokenRequestDto refreshTokenRequestDto) {
+        String resolveToken = resolveToken(refreshTokenRequestDto.getRefreshToken());
 
         tokenProvider.validateToken(resolveToken);
 
@@ -66,13 +67,13 @@ public class MemberService {
         findTokenEntity.changeToken(newToken);
 
         return TokenDto.builder()
-                .token("Bearer-" + tokenProvider.createToken(authentication))
-                .refreshToken("Bearer-" + newToken)
+                .token("Bearer " + tokenProvider.createToken(authentication))
+                .refreshToken("Bearer " + newToken)
                 .build();
     }
 
     private String resolveToken(String token) {
-        if (token.startsWith("Bearer-")) {
+        if (token.startsWith("Bearer ")) {
             return token.substring(7);
         }
         throw new RuntimeException("not valid refresh token!!");
