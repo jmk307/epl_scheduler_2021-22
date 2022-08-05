@@ -1,6 +1,6 @@
 package com.football.epl_scheduler_202122.controller.api;
 
-import com.football.epl_scheduler_202122.dto.Board.BoardResponseDTO;
+import com.football.epl_scheduler_202122.dto.Board.BoardResponseDto;
 import com.football.epl_scheduler_202122.dto.Board.Search.SearchCondition;
 import com.football.epl_scheduler_202122.dto.Board.Search.SearchType;
 import com.football.epl_scheduler_202122.service.BoardService;
@@ -21,7 +21,7 @@ public class BoardApiController {
 
     // 초기화면
     @GetMapping
-    public ResponseEntity<List<BoardResponseDTO>> main(@PathVariable String startDate,
+    public ResponseEntity<List<BoardResponseDto>> main(@PathVariable String startDate,
                                                        @RequestParam(defaultValue = "0") int page,
                                                        Pageable pageable,
                                                        @RequestParam(required = false) SearchType searchType,

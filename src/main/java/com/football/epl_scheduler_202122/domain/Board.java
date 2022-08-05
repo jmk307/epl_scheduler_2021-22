@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -28,6 +29,10 @@ public class Board {
     private Date startTime;
 
     private String result;
+
+    // 게시물이 삭제되면 댓글 또한 삭제되어야 하기 때문에 CascadeType.REMOVE로 설정
+    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    private List<BoardReply> boardReplyList;
 
     public void update(String home, String away, String startDate, Date startTime, String result) {
         this.home = home;

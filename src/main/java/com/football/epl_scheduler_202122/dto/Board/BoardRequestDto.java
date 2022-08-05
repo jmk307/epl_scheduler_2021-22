@@ -10,7 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BoardRequestDTO {
+public class BoardRequestDto {
     private String home;
 
     private String away;
