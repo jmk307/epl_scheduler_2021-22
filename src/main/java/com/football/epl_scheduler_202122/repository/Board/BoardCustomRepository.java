@@ -1,28 +1,26 @@
-package com.football.epl_scheduler_202122.repository;
+package com.football.epl_scheduler_202122.repository.Board;
 
 import com.football.epl_scheduler_202122.domain.Board;
-import com.football.epl_scheduler_202122.dto.Board.SearchCondition;
-import com.football.epl_scheduler_202122.dto.Board.SearchType;
+import com.football.epl_scheduler_202122.dto.Board.Search.SearchCondition;
+import com.football.epl_scheduler_202122.dto.Board.Search.SearchType;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.function.Supplier;
 
 import static com.football.epl_scheduler_202122.domain.QBoard.board;
 
-public class BoardRepositoryImpl implements BoardCustomRepository {
+@Repository
+@RequiredArgsConstructor
+public class BoardCustomRepository {
 
     public final JPAQueryFactory queryFactory;
 
-    public BoardRepositoryImpl(EntityManager em) {
-        this.queryFactory = new JPAQueryFactory(em);
-    }
-
-    @Override
     public List<Board> search(SearchCondition condition, String startDate, Pageable pageable) {
         return queryFactory
                 .selectFrom(board)

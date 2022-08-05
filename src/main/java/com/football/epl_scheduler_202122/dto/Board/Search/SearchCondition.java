@@ -1,4 +1,4 @@
-package com.football.epl_scheduler_202122.dto.Board;
+package com.football.epl_scheduler_202122.dto.Board.Search;
 
 import lombok.*;
 

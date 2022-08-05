@@ -1,10 +1,11 @@
-package com.football.epl_scheduler_202122.repository;
+package com.football.epl_scheduler_202122.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 @Configuration
 public class QuerydslConfig {

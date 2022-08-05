@@ -1,8 +1,8 @@
 package com.football.epl_scheduler_202122.controller.api;
 
 import com.football.epl_scheduler_202122.dto.Board.BoardResponseDTO;
-import com.football.epl_scheduler_202122.dto.Board.SearchCondition;
-import com.football.epl_scheduler_202122.dto.Board.SearchType;
+import com.football.epl_scheduler_202122.dto.Board.Search.SearchCondition;
+import com.football.epl_scheduler_202122.dto.Board.Search.SearchType;
 import com.football.epl_scheduler_202122.service.BoardService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
